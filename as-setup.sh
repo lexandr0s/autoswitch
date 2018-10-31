@@ -12,4 +12,7 @@ cp as/rig_data.json /hive-config
 rm -R as
 rm autoswitch.tar
 cd /home/user
-
+echo "Install Autoswitch complete"
+echo "Now you need to configure it."
+echo "See the manual"
+echo "Happy mining!"
