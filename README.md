@@ -14,3 +14,4 @@ curl https://raw.githubusercontent.com/lexandr0s/autoswitch/master/as-setup.sh |
  After finishing the installation script, the program needs to be configured. For more information, see the Hive Os forum.
  
  После окончания работы установочного скрипта, программа нуждается в конфигурации. Подробную информацию смотрите на форуме Hive Os
+ https://forum.hiveos.farm/t/autoswitch-for-nicehash-nicehash/8828
