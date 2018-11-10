@@ -22,6 +22,3 @@ echo "If this is the first installation, тow you need to configure it."
 echo "See the manual on Hive OS forum"
 echo "If this is an update, you do not need to do anything."
 echo "Happy mining!"
-
-
-#Set the PROFILE variable if you want to create several different filesystems for one algorithm. For example, with different miners (for NVIDIA and AMD) or with different wallet addresses. If this variable is set, you can create a file system with names like this: Autoswitch Algorithm PROFILE and autoswitch on this riga will use flight sheets only
