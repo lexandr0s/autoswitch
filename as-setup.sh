@@ -18,7 +18,7 @@ rm autoswitch.tar
 cd /home/user
 echo
 echo "Install Autoswitch complete"
-echo "If this is the first installation, тow you need to configure it."
+echo "If this is the first installation, now you need to configure it."
 echo "See the manual on Hive OS forum"
 echo "If this is an update, you do not need to do anything."
 echo "Happy mining!"
