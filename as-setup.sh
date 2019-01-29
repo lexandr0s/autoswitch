@@ -14,15 +14,28 @@ cp as/autoswitch_bin /hive/sbin
 
 if [[ ! -f /hive-config/autoswitch.conf ]]; then
 	cp as/autoswitch.conf /hive-config
+else
+	source /hive-config/autoswitch.conf
+	[[ $(echo $BENCHMARK | jq .Beam) == null ]] &&	sed -i "s/}'/,\n\"Beam\":0\n}'/" /hive-config/autoswitch.conf
 fi
 
 
 if [[ ! -f /hive-config/rig_data.json ]]; then
 	cp as/rig_data.json /hive-config
+else
+	rig_data=$(cat /hive-config/rig_data.json)
+	if [[ -z $(echo $rig_data | jq ".[] | select (.nice_algo == 37) | .algo") ]]; then
+		rig_data=$(echo $rig_data | jq ".[. | length] |= . + {\"hive_fs\": \"Autoswitch Beam\",\"algo\": \"Beam\",\"bench\": 0,\"mining\": 1,\"mult\": 0,\"nice_algo\": 37,\"fs_id\": 0}")
+		echo $rig_data | jq . > /hive-config/rig_data.json
+	fi
 fi
+
 
 if [[ ! -f /hive-config/autoswitch_pow.conf ]]; then
 	cp as/autoswitch_pow.conf /hive-config
+else
+	source /hive-config/autoswitch_pow.conf
+	[[ $(echo $POW | jq .Beam) == null ]] &&	sed -i "s/}'/,\n\"Beam\":0\n}'/" /hive-config/autoswitch_pow.conf
 fi
 
 rm -R as
