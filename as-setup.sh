@@ -17,6 +17,9 @@ if [[ ! -f /hive-config/autoswitch.conf ]]; then
 else
 	source /hive-config/autoswitch.conf
 	[[ $(echo $BENCHMARK | jq .Beam) == null ]] &&	sed -i "s/}'/,\n\"Beam\":0\n}'/" /hive-config/autoswitch.conf
+	[[ $(echo $BENCHMARK | jq .Grin29) == null ]] &&	sed -i "s/}'/,\n\"Grin29\":0\n}'/" /hive-config/autoswitch.conf
+	[[ $(echo $BENCHMARK | jq .Grin31) == null ]] &&	sed -i "s/}'/,\n\"Grin31\":0\n}'/" /hive-config/autoswitch.conf
+	[[ $(echo $BENCHMARK | jq .Lyra2rev3) == null ]] &&	sed -i "s/}'/,\n\"Lyra2rev3\":0\n}'/" /hive-config/autoswitch.conf
 fi
 
 
@@ -26,6 +29,9 @@ else
 	rig_data=$(cat /hive-config/rig_data.json)
 	if [[ -z $(echo $rig_data | jq ".[] | select (.nice_algo == 37) | .algo") ]]; then
 		rig_data=$(echo $rig_data | jq ".[. | length] |= . + {\"hive_fs\": \"Autoswitch Beam\",\"algo\": \"Beam\",\"bench\": 0,\"mining\": 1,\"mult\": 0,\"nice_algo\": 37,\"fs_id\": 0}")
+		rig_data=$(echo $rig_data | jq ".[. | length] |= . + {\"hive_fs\": \"Autoswitch Grin29\",\"algo\": \"Grin29\",\"bench\": 0,\"mining\": 1,\"mult\": 0,\"nice_algo\": 38,\"fs_id\": 0}")
+		rig_data=$(echo $rig_data | jq ".[. | length] |= . + {\"hive_fs\": \"Autoswitch Grin31\",\"algo\": \"Grin31\",\"bench\": 0,\"mining\": 1,\"mult\": 0,\"nice_algo\": 39,\"fs_id\": 0}")
+		rig_data=$(echo $rig_data | jq ".[. | length] |= . + {\"hive_fs\": \"Autoswitch Lyra2rev3\",\"algo\": \"Lyra2rev3\",\"bench\": 0,\"mining\": 1,\"mult\": 0,\"nice_algo\": 40,\"fs_id\": 0}")
 		echo $rig_data | jq . > /hive-config/rig_data.json
 	fi
 fi
@@ -36,6 +42,9 @@ if [[ ! -f /hive-config/autoswitch_pow.conf ]]; then
 else
 	source /hive-config/autoswitch_pow.conf
 	[[ $(echo $POW | jq .Beam) == null ]] &&	sed -i "s/}'/,\n\"Beam\":0\n}'/" /hive-config/autoswitch_pow.conf
+	[[ $(echo $POW | jq .Grin29) == null ]] &&	sed -i "s/}'/,\n\"Grin29\":0\n}'/" /hive-config/autoswitch_pow.conf
+	[[ $(echo $POW | jq .Grin31) == null ]] &&	sed -i "s/}'/,\n\"Grin31\":0\n}'/" /hive-config/autoswitch_pow.conf
+	[[ $(echo $POW | jq .Lyra2rev3) == null ]] &&	sed -i "s/}'/,\n\"Lyra2rev3\":0\n}'/" /hive-config/autoswitch_pow.conf
 fi
 
 rm -R as
