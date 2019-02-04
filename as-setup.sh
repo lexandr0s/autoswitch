@@ -23,24 +23,25 @@ else
 fi
 
 
-if [[ ! -f /hive-config/rig_data.json ]]; then
-	cp as/rig_data.json /hive-config
-else
-	rig_data=$(cat /hive-config/rig_data.json)
-	if [[ -z $(echo $rig_data | jq ".[] | select (.nice_algo == 37) | .algo") ]]; then
-		rig_data=$(echo $rig_data | jq ".[. | length] |= . + {\"hive_fs\": \"Autoswitch Beam\",\"algo\": \"Beam\",\"bench\": 0,\"mining\": 1,\"mult\": 0,\"nice_algo\": 37,\"fs_id\": 0}")
-	fi
-	if [[ -z $(echo $rig_data | jq ".[] | select (.nice_algo == 38) | .algo") ]]; then
-		rig_data=$(echo $rig_data | jq ".[. | length] |= . + {\"hive_fs\": \"Autoswitch Grin29\",\"algo\": \"Grin29\",\"bench\": 0,\"mining\": 1,\"mult\": 0,\"nice_algo\": 38,\"fs_id\": 0}")
-	fi
-	if [[ -z $(echo $rig_data | jq ".[] | select (.nice_algo == 39) | .algo") ]]; then
-		rig_data=$(echo $rig_data | jq ".[. | length] |= . + {\"hive_fs\": \"Autoswitch Grin31\",\"algo\": \"Grin31\",\"bench\": 0,\"mining\": 1,\"mult\": 0,\"nice_algo\": 39,\"fs_id\": 0}")
-	fi
-	if [[ -z $(echo $rig_data | jq ".[] | select (.nice_algo == 40) | .algo") ]]; then
-		rig_data=$(echo $rig_data | jq ".[. | length] |= . + {\"hive_fs\": \"Autoswitch Lyra2rev3\",\"algo\": \"Lyra2rev3\",\"bench\": 0,\"mining\": 1,\"mult\": 0,\"nice_algo\": 40,\"fs_id\": 0}")
-	fi
-	echo $rig_data | jq . > /hive-config/rig_data.json
-fi
+#if [[ ! -f /hive-config/rig_data.json ]]; then
+#	cp as/rig_data.json /hive-config
+#else
+#	rig_data=$(cat /hive-config/rig_data.json)
+#	if [[ -z $(echo $rig_data | jq ".[] | select (.nice_algo == 37) | .algo") ]]; then
+#		rig_data=$(echo $rig_data | jq ".[. | length] |= . + {\"hive_fs\": \"Autoswitch Beam\",\"algo\": \"Beam\",\"bench\": 0,\"mining\": 1,\"mult\": 0,\"nice_algo\": 37,\"fs_id\": 0}")
+#	fi
+#	if [[ -z $(echo $rig_data | jq ".[] | select (.nice_algo == 38) | .algo") ]]; then
+#		rig_data=$(echo $rig_data | jq ".[. | length] |= . + {\"hive_fs\": \"Autoswitch Grin29\",\"algo\": \"Grin29\",\"bench\": 0,\"mining\": 1,\"mult\": 0,\"nice_algo\": 38,\"fs_id\": 0}")
+#	fi
+#	if [[ -z $(echo $rig_data | jq ".[] | select (.nice_algo == 39) | .algo") ]]; then
+#		rig_data=$(echo $rig_data | jq ".[. | length] |= . + {\"hive_fs\": \"Autoswitch Grin31\",\"algo\": \"Grin31\",\"bench\": 0,\"mining\": 1,\"mult\": 0,\"nice_algo\": 39,\"fs_id\": 0}")
+#	fi
+#	if [[ -z $(echo $rig_data | jq ".[] | select (.nice_algo == 40) | .algo") ]]; then
+#		rig_data=$(echo $rig_data | jq ".[. | length] |= . + {\"hive_fs\": \"Autoswitch Lyra2rev3\",\"algo\": \"Lyra2rev3\",\"bench\": 0,\"mining\": 1,\"mult\": 0,\"nice_algo\": 40,\"fs_id\": 0}")
+#	fi
+#	rig_data=$(echo $rig_data | jq ".(nice_algo = 37) | .algo=\"Test\"")
+#	echo $rig_data | jq . > /hive-config/rig_data.json
+#fi
 
 
 if [[ ! -f /hive-config/autoswitch_pow.conf ]]; then
@@ -52,6 +53,11 @@ else
 	[[ $(echo $POW | jq .Grin31) == null ]] &&	sed -i "s/}'/,\n\"Grin31\":0\n}'/" /hive-config/autoswitch_pow.conf
 	[[ $(echo $POW | jq .Lyra2rev3) == null ]] &&	sed -i "s/}'/,\n\"Lyra2rev3\":0\n}'/" /hive-config/autoswitch_pow.conf
 fi
+
+cp as/rig_data.json /hive-config
+autoswitch config
+
+
 
 rm -R as
 rm autoswitch.tar
