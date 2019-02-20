@@ -20,6 +20,7 @@ else
 	[[ $(echo $BENCHMARK | jq .Grin29) == null ]] &&	sed -i "s/}'/,\n\"Grin29\":0\n}'/" /hive-config/autoswitch.conf
 	[[ $(echo $BENCHMARK | jq .Grin31) == null ]] &&	sed -i "s/}'/,\n\"Grin31\":0\n}'/" /hive-config/autoswitch.conf
 	[[ $(echo $BENCHMARK | jq .Lyra2rev3) == null ]] &&	sed -i "s/}'/,\n\"Lyra2rev3\":0\n}'/" /hive-config/autoswitch.conf
+	[[ $(echo $BENCHMARK | jq .MTP) == null ]] &&	sed -i "s/}'/,\n\"MTP\":0\n}'/" /hive-config/autoswitch.conf
 fi
 
 
@@ -52,6 +53,7 @@ else
 	[[ $(echo $POW | jq .Grin29) == null ]] &&	sed -i "s/}'/,\n\"Grin29\":0\n}'/" /hive-config/autoswitch_pow.conf
 	[[ $(echo $POW | jq .Grin31) == null ]] &&	sed -i "s/}'/,\n\"Grin31\":0\n}'/" /hive-config/autoswitch_pow.conf
 	[[ $(echo $POW | jq .Lyra2rev3) == null ]] &&	sed -i "s/}'/,\n\"Lyra2rev3\":0\n}'/" /hive-config/autoswitch_pow.conf
+	[[ $(echo $POW | jq .MTP) == null ]] &&	sed -i "s/}'/,\n\"MTP\":0\n}'/" /hive-config/autoswitch_pow.conf
 fi
 
 cp as/rig_data.json /hive-config
