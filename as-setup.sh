@@ -1,5 +1,7 @@
 #!/bin/bash
 
+firsttime=1
+
 dpkg -s bc > /dev/null 2>&1
 if [[ $? -ne 0 ]]; then
 	apt update
@@ -15,6 +17,7 @@ cp as/autoswitch_bin /hive/sbin
 if [[ ! -f /hive-config/autoswitch.conf ]]; then
 	cp as/autoswitch.conf /hive-config
 else
+	firsttime=0
 	source /hive-config/autoswitch.conf
 	[[ $(echo $BENCHMARK | jq .Beam) == null ]] &&	sed -i "s/}'/,\n\"Beam\":0\n}'/" /hive-config/autoswitch.conf
 	[[ $(echo $BENCHMARK | jq .Grin29) == null ]] &&	sed -i "s/}'/,\n\"Grin29\":0\n}'/" /hive-config/autoswitch.conf
@@ -57,7 +60,7 @@ else
 fi
 
 cp as/rig_data.json /hive-config
-autoswitch config
+[[ $firsttime -eq 0 ]] && autoswitch config
 
 
 
