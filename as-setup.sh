@@ -70,8 +70,24 @@ rm -R as
 rm autoswitch.tar
 cd /home/user
 echo
-echo "Install Autoswitch complete"
-echo "If this is the first installation, now you need to configure it."
-echo "See the manual on Hive OS forum"
+echo "For first time installation configuration is required."
+read -p "Do you want to configure it automatically now?(y/n)" -n 1 -r
+
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	. /hive-config/rig.conf
+	echo "$FARM_ID" | sed -i -e"s/^FARM_ID=.*/FARM_ID=$FARM_ID/" /hive-config/autoswitch.conf
+	echo
+	echo "Farm ID was automatically entered."
+	read -p "Do you have your API Token?(y/n)" -n 1 -r
+	
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		echo
+		read -p "Enter your API Token: " TOKEN
+		echo "$TOKEN" | sed -i -e"s/^TOKEN=.*/TOKEN=\"$TOKEN\"/" /hive-config/autoswitch.conf
+	fi
+fi
+echo
+echo "Installation of Nicehash Autoswitch is complete."
+echo "Further documentation can be found on the HiveOS forum."
 echo "If this is an update, you do not need to do anything."
 echo "Happy mining!"
