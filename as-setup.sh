@@ -8,7 +8,6 @@ if [[ $? -ne 0 ]]; then
 	apt install -y bc
 fi
 
-cd /tmp
 wget https://github.com/lexandr0s/autoswitch/raw/master/autoswitch.tar
 tar -xf autoswitch.tar 
 cp as/autoswitch /hive/sbin
@@ -69,9 +68,20 @@ cp as/rig_data.json /hive-config
 rm -R as
 rm autoswitch.tar
 cd /home/user
+
+if [[ $(cat /etc/default/grub | grep -c ipv6.disable=1) -ne 0 ]]; then
+	sed -i "s/ipv6.disable=1 //" /etc/default/grub
+	sleep 1
+	update-grub
+fi
+
 echo
 echo "Install Autoswitch complete"
 echo "If this is the first installation, now you need to configure it."
 echo "See the manual on Hive OS forum"
 echo "If this is an update, you do not need to do anything."
 echo "Happy mining!"
+
+message info "Your system reconfigure for IPv6 enable. Reboot is required. Reboot after 15 seconds"
+sleep 15
+sreboot
