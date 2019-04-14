@@ -68,11 +68,12 @@ cp as/rig_data.json /hive-config
 rm -R as
 rm autoswitch.tar
 cd /home/user
-
+need_reboot=0
 if [[ $(cat /etc/default/grub | grep -c ipv6.disable=1) -ne 0 ]]; then
 	sed -i "s/ipv6.disable=1 //" /etc/default/grub
 	sleep 1
 	update-grub
+	need_reboot=1
 fi
 
 echo
@@ -82,6 +83,9 @@ echo "See the manual on Hive OS forum"
 echo "If this is an update, you do not need to do anything."
 echo "Happy mining!"
 
-message info "Your system reconfigure for IPv6 enable. Reboot is required. Reboot after 15 seconds"
-sleep 15
-sreboot
+if [[ $need_reboot -eq 1 ]]; then
+	message info "Your system reconfigure for IPv6 enable. Reboot is required. Reboot after 15 seconds"
+	sleep 15
+	sreboot
+fi
+
