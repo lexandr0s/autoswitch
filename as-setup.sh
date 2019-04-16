@@ -24,6 +24,8 @@ else
 	[[ $(echo $BENCHMARK | jq .Lyra2rev3) == null ]] &&	sed -i "s/}'/,\n\"Lyra2rev3\":0\n}'/" /hive-config/autoswitch.conf
 	[[ $(echo $BENCHMARK | jq .MTP) == null ]] &&	sed -i "s/}'/,\n\"MTP\":0\n}'/" /hive-config/autoswitch.conf
 	[[ $(echo $BENCHMARK | jq .CryptoNightR) == null ]] &&	sed -i "s/}'/,\n\"CryptoNightR\":0\n}'/" /hive-config/autoswitch.conf
+	
+	[[ $(cat /hive-config/autoswitch.conf | grep -c "IPV6") -eq 0 ]] && sed -i "/BENCHMARK='{/i\#If you dont want to use IPv6 on algo X16r, set IPV6=0\nIPV6=1\n" /hive-config/autoswitch.conf
 fi
 
 
