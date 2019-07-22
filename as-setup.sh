@@ -25,9 +25,12 @@ else
 	[[ $(echo $BENCHMARK | jq .MTP) == null ]] &&	sed -i "s/}'/,\n\"MTP\":0\n}'/" /hive-config/autoswitch.conf
 	[[ $(echo $BENCHMARK | jq .CryptoNightR) == null ]] &&	sed -i "s/}'/,\n\"CryptoNightR\":0\n}'/" /hive-config/autoswitch.conf
 	[[ $(echo $BENCHMARK | jq .CuckooAE) == null ]] &&	sed -i "s/}'/,\n\"CuckooAE\":0\n}'/" /hive-config/autoswitch.conf
+	[[ $(echo $BENCHMARK | jq .Grin29d) == null ]] &&	sed -i "s/}'/,\n\"Grin29d\":0\n}'/" /hive-config/autoswitch.conf
 	
 	[[ $(cat /hive-config/autoswitch.conf | grep -c "IPV6") -eq 0 ]] && sed -i "/BENCHMARK='{/i\#If you dont want to use IPv6 on algo X16r, set IPV6=0\nIPV6=1\n" /hive-config/autoswitch.conf
 	[[ $(cat /hive-config/autoswitch.conf | grep -c "ZIL") -eq 0 ]] && sed -i "/use IPv6/i\#If you want mining Zilliqa, set ZIL=1 or ZIL=2\nZIL=0\n" /hive-config/autoswitch.conf
+	
+	[[ $(cat /hive-config/autoswitch.conf | grep -c "USE_NEW") -eq 0 ]] && sed -i "/BENCHMARK=/i\#Set variable for New Platform\nUSE_NEW=1\n" /hive-config/autoswitch.conf
 fi
 
 
@@ -63,9 +66,11 @@ else
 	[[ $(echo $POW | jq .MTP) == null ]] &&	sed -i "s/}'/,\n\"MTP\":0\n}'/" /hive-config/autoswitch_pow.conf
 	[[ $(echo $POW | jq .CryptoNightR) == null ]] &&	sed -i "s/}'/,\n\"CryptoNightR\":0\n}'/" /hive-config/autoswitch_pow.conf
 	[[ $(echo $POW | jq .CuckooAE) == null ]] &&	sed -i "s/}'/,\n\"CuckooAE\":0\n}'/" /hive-config/autoswitch_pow.conf
+	[[ $(echo $POW | jq .Grin29d) == null ]] &&	sed -i "s/}'/,\n\"Grin29d\":0\n}'/" /hive-config/autoswitch_pow.conf
 fi
 
 cp as/rig_data.json /hive-config
+cp as/rig_data_new.json /hive-config
 [[ $firsttime -eq 0 ]] && autoswitch config
 
 
