@@ -82,11 +82,14 @@ rm -R as
 rm autoswitch.tar
 cd /home/user
 need_reboot=0
-if [[ $(cat /etc/default/grub | grep -c ipv6.disable=1) -ne 0 ]]; then
-	sed -i "s/ipv6.disable=1 //" /etc/default/grub
-	sleep 1
-	update-grub
-	need_reboot=1
+source /hive-config/autoswitch.conf
+if [[ $IPV6 == 1 ]]; then
+	if [[ $(cat /etc/default/grub | grep -c ipv6.disable=1) -ne 0 ]]; then
+		sed -i "s/ipv6.disable=1 //" /etc/default/grub
+		sleep 1
+		update-grub
+		need_reboot=1
+	fi
 fi
 
 echo
