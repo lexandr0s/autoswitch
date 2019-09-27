@@ -59,7 +59,7 @@ fi
 
 cp as/rig_data.json /hive-config
 [[ -f /hive-config/rig_data_new.json ]] && rm /hive-config/rig_data_new.json
-[[ $firsttime -eq 0 ]] && autoswitch rename_fs && autoswitch config
+[[ $firsttime -eq 0 ]] && autoswitch config
 
 
 
