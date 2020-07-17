@@ -36,6 +36,7 @@ else
 	[[ $(echo $BENCHMARK | jq .KawPow) == null ]] &&	sed -i "s/}'/,\n\"KawPow\":0\n}'/" /hive-config/autoswitch.conf
 	[[ $(echo $BENCHMARK | jq .CuckarooBFC) == null ]] &&	sed -i "s/}'/,\n\"CuckarooBFC\":0\n}'/" /hive-config/autoswitch.conf
 	[[ $(echo $BENCHMARK | jq .BeamV3) == null ]] &&	sed -i "s/}'/,\n\"BeamV3\":0\n}'/" /hive-config/autoswitch.conf
+	[[ $(echo $BENCHMARK | jq .CuckaRooz29) == null ]] &&	sed -i "s/}'/,\n\"CuckaRooz29\":0\n}'/" /hive-config/autoswitch.conf
 	
 	#[[ $(cat /hive-config/autoswitch.conf | grep -c "IPV6") -eq 0 ]] && sed -i "/BENCHMARK='{/i\#If you dont want to use IPv6 on algo X16r, set IPV6=0\nIPV6=1\n" /hive-config/autoswitch.conf
 	[[ $(cat /hive-config/autoswitch.conf | grep -c "ZIL") -eq 0 ]] && sed -i "/use IPv6/i\#If you want mining Zilliqa, set ZIL=1 or ZIL=2\nZIL=0\n" /hive-config/autoswitch.conf
@@ -69,6 +70,7 @@ else
 	[[ $(echo $POW | jq .KawPow) == null ]] &&	sed -i "s/}'/,\n\"KawPow\":0\n}'/" /hive-config/autoswitch_pow.conf
 	[[ $(echo $POW | jq .CuckarooBFC) == null ]] &&	sed -i "s/}'/,\n\"CuckarooBFC\":0\n}'/" /hive-config/autoswitch_pow.conf
 	[[ $(echo $POW | jq .BeamV3) == null ]] &&	sed -i "s/}'/,\n\"BeamV3\":0\n}'/" /hive-config/autoswitch_pow.conf
+	[[ $(echo $POW | jq .CuckaRooz29) == null ]] &&	sed -i "s/}'/,\n\"CuckaRooz29\":0\n}'/" /hive-config/autoswitch_pow.conf
 fi
 
 cp as/rig_data.json /hive-config
