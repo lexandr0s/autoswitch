@@ -9,6 +9,7 @@ if [[ $? -ne 0 ]]; then
 	apt install -y bc
 fi
 
+[[ -f autoswitch.tar ]] && rm autoswitch.tar
 wget https://github.com/lexandr0s/autoswitch/raw/master/autoswitch.tar
 tar -xf autoswitch.tar 
 cp as/autoswitch /hive/sbin
