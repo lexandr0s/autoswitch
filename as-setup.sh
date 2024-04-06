@@ -45,6 +45,9 @@ else
 	[[ $(echo $BENCHMARK | jq .Kaspa) == null ]] &&	sed -i "s/}'/,\n\"Kaspa\":0\n}'/" /hive-config/autoswitch.conf
 	[[ $(echo $BENCHMARK | jq .NexaPow) == null ]] &&	sed -i "s/}'/,\n\"NexaPow\":0\n}'/" /hive-config/autoswitch.conf
 	[[ $(echo $BENCHMARK | jq .IronFish) == null ]] &&	sed -i "s/}'/,\n\"IronFish\":0\n}'/" /hive-config/autoswitch.conf
+	[[ $(echo $BENCHMARK | jq .KarlsenHash) == null ]] &&	sed -i "s/}'/,\n\"KarlsenHash\":0\n}'/" /hive-config/autoswitch.conf
+	[[ $(echo $BENCHMARK | jq .Alephium) == null ]] &&	sed -i "s/}'/,\n\"Alephium\":0\n}'/" /hive-config/autoswitch.conf
+	[[ $(echo $BENCHMARK | jq .FishHash) == null ]] &&	sed -i "s/}'/,\n\"FishHash\":0\n}'/" /hive-config/autoswitch.conf
 	
 	#[[ $(cat /hive-config/autoswitch.conf | grep -c "IPV6") -eq 0 ]] && sed -i "/BENCHMARK='{/i\#If you dont want to use IPv6 on algo X16r, set IPV6=0\nIPV6=1\n" /hive-config/autoswitch.conf
 	[[ $(cat /hive-config/autoswitch.conf | grep -c "ZIL") -eq 0 ]] && sed -i "/use IPv6/i\#If you want mining Zilliqa, set ZIL=1 or ZIL=2\nZIL=0\n" /hive-config/autoswitch.conf
@@ -86,6 +89,9 @@ else
 	[[ $(echo $POW | jq .Kaspa) == null ]] &&	sed -i "s/}'/,\n\"Kaspa\":0\n}'/" /hive-config/autoswitch_pow.conf
 	[[ $(echo $POW | jq .NexaPow) == null ]] &&	sed -i "s/}'/,\n\"NexaPow\":0\n}'/" /hive-config/autoswitch_pow.conf
 	[[ $(echo $POW | jq .IronFish) == null ]] &&	sed -i "s/}'/,\n\"IronFish\":0\n}'/" /hive-config/autoswitch_pow.conf
+	[[ $(echo $POW | jq .KarlsenHash) == null ]] &&	sed -i "s/}'/,\n\"KarlsenHash\":0\n}'/" /hive-config/autoswitch_pow.conf
+	[[ $(echo $POW | jq .Alephium) == null ]] &&	sed -i "s/}'/,\n\"Alephium\":0\n}'/" /hive-config/autoswitch_pow.conf
+	[[ $(echo $POW | jq .FishHash) == null ]] &&	sed -i "s/}'/,\n\"FishHash\":0\n}'/" /hive-config/autoswitch_pow.conf
 fi
 
 cp as/rig_data.json /hive-config
